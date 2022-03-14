@@ -80,28 +80,28 @@ void UImpactWorldSubSystem::Deinitialize()
 {
 	if (RT_ImpactWaterHeightMapA)
 	{
-		RT_ImpactWaterHeightMapA->MarkPendingKill();
+		RT_ImpactWaterHeightMapA->MarkAsGarbage();
 	}
 	if (RT_ImpactWaterHeightMapB)
 	{
-		RT_ImpactWaterHeightMapB->MarkPendingKill();
+		RT_ImpactWaterHeightMapB->MarkAsGarbage();
 	}
 	if (RT_ImpactWaterHeightMapC)
 	{
-		RT_ImpactWaterHeightMapC->MarkPendingKill();
+		RT_ImpactWaterHeightMapC->MarkAsGarbage();
 	}
 
 	if (RT_ImpactFoliageHeightMapA)
 	{
-		RT_ImpactFoliageHeightMapA->MarkPendingKill();
+		RT_ImpactFoliageHeightMapA->MarkAsGarbage();
 	}
 	if (RT_ImpactFoliageHeightMapB)
 	{
-		RT_ImpactFoliageHeightMapB->MarkPendingKill();
+		RT_ImpactFoliageHeightMapB->MarkAsGarbage();
 	}
 	if (RT_ImpactFoliageHeightMapC)
 	{
-		RT_ImpactFoliageHeightMapC->MarkPendingKill();
+		RT_ImpactFoliageHeightMapC->MarkAsGarbage();
 	}
 }
 
@@ -221,9 +221,9 @@ void UImpactWorldSubSystem::GenerateWaterSplat(float InDeltaTime)
 
             FGenerateWaterSplatUniformParameters EmptyGenerateSplatUniformParameters;
             {
-                EmptyGenerateSplatUniformParameters.HitStampTexture = HitStampTexture->Resource->TextureRHI;
+                EmptyGenerateSplatUniformParameters.HitStampTexture = HitStampTexture->GetResource()->TextureRHI;
                 EmptyGenerateSplatUniformParameters.HitStampTextureSampler = TStaticSamplerState<SF_Bilinear, AM_Wrap, AM_Wrap>::GetRHI();
-                EmptyGenerateSplatUniformParameters.CanvasTexture = RT_ImpactWaterHeightMap->Resource->TextureRHI;
+                EmptyGenerateSplatUniformParameters.CanvasTexture = RT_ImpactWaterHeightMap->GetResource()->TextureRHI;
                 EmptyGenerateSplatUniformParameters.CanvasTextureSampler = TStaticSamplerState<SF_Bilinear, AM_Wrap, AM_Wrap>::GetRHI();
                 EmptyGenerateSplatUniformParameters.TexelSizeScalar = TexelSizeConstant;
                 EmptyGenerateSplatUniformParameters.HitLocationNum = ForceSplatParameter.Num();
@@ -239,7 +239,8 @@ void UImpactWorldSubSystem::GenerateWaterSplat(float InDeltaTime)
                         EmptyGenerateSplatUniformParameters.HitParam1Array[i].Y = ForceSplatParameter.FoamSizeInPercentArray[i];
                         EmptyGenerateSplatUniformParameters.HitParam1Array[i].Z = ForceSplatParameter.FoamSizeRangeArray[i].X;
                         EmptyGenerateSplatUniformParameters.HitParam1Array[i].W = ForceSplatParameter.FoamSizeRangeArray[i].Y;
-                        EmptyGenerateSplatUniformParameters.HitLocationArray[i] = ForceSplatParameter.HitLocationArray[i];
+                        EmptyGenerateSplatUniformParameters.HitLocationArray[i].X = ForceSplatParameter.HitLocationArray[i].X;
+						EmptyGenerateSplatUniformParameters.HitLocationArray[i].Y = ForceSplatParameter.HitLocationArray[i].Y;
                     }
                 }
             }
@@ -334,9 +335,9 @@ void UImpactWorldSubSystem::GenerateFoliageSplat(float InDeltaTime)
 
 			FGenerateFoliageSplatUniformParameters EmptyGenerateSplatUniformParameters;
 			{
-				EmptyGenerateSplatUniformParameters.HitStampTexture = HitStampTexture->Resource->TextureRHI;
+				EmptyGenerateSplatUniformParameters.HitStampTexture = HitStampTexture->GetResource()->TextureRHI;
 				EmptyGenerateSplatUniformParameters.HitStampTextureSampler = TStaticSamplerState<SF_Bilinear, AM_Wrap, AM_Wrap>::GetRHI();
-				EmptyGenerateSplatUniformParameters.CanvasTexture = RT_ImpactFoliageHeightMap->Resource->TextureRHI;
+				EmptyGenerateSplatUniformParameters.CanvasTexture = RT_ImpactFoliageHeightMap->GetResource()->TextureRHI;
 				EmptyGenerateSplatUniformParameters.CanvasTextureSampler = TStaticSamplerState<SF_Bilinear, AM_Wrap, AM_Wrap>::GetRHI();
 				EmptyGenerateSplatUniformParameters.TexelSizeScalar = TexelSizeConstant;
 				EmptyGenerateSplatUniformParameters.HitLocationNum = ForceSplatParameter.Num();
@@ -348,7 +349,8 @@ void UImpactWorldSubSystem::GenerateFoliageSplat(float InDeltaTime)
 						EmptyGenerateSplatUniformParameters.HitParamArray[i].Y = ForceSplatParameter.ImpactSizeInPercentArray[i];
 						EmptyGenerateSplatUniformParameters.HitParamArray[i].Z = ForceSplatParameter.ImpactSizeRangeArray[i].X;
 						EmptyGenerateSplatUniformParameters.HitParamArray[i].W = ForceSplatParameter.ImpactSizeRangeArray[i].Y;
-						EmptyGenerateSplatUniformParameters.HitLocationArray[i] = ForceSplatParameter.HitLocationArray[i];
+						EmptyGenerateSplatUniformParameters.HitLocationArray[i].X = ForceSplatParameter.HitLocationArray[i].X;
+						EmptyGenerateSplatUniformParameters.HitLocationArray[i].Y = ForceSplatParameter.HitLocationArray[i].Y;
 					}
 				}
 			}

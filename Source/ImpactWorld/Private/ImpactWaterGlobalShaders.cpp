@@ -186,7 +186,7 @@ void FImpactWaterGlobalShaderCommands::GenerateSplatToRenderTarget(FRHICommandLi
 		RenderTargetResource,
 		NULL,
 		FEngineShowFlags(ESFIM_Game))
-		.SetWorldTimes(0, 0, 0)
+		.SetTime(FGameTime::CreateDilated(0, 0, 0, 0))
 		.SetGammaCorrection(RenderTargetResource->GetDisplayGamma()));
 
 	// Set the view family's render target/viewport.
@@ -234,7 +234,7 @@ void FImpactWaterGlobalShaderCommands::GenerateSplatToRenderTarget(FRHICommandLi
 	GraphicsPSOInit.BoundShaderState.PixelShaderRHI = PixelShader.GetPixelShader();
 	GraphicsPSOInit.PrimitiveType = PT_TriangleList;
 
-	SetGraphicsPipelineState(RHICmdList, GraphicsPSOInit);
+	SetGraphicsPipelineState(RHICmdList, GraphicsPSOInit,0);
 
 	PixelShader->SetUniformBuffer(RHICmdList, UniformBuffer);
 
@@ -260,7 +260,7 @@ void FImpactWaterGlobalShaderCommands::PropagateSplatToRenderTarget(FRHICommandL
 		RenderTargetResource,
 		NULL,
 		FEngineShowFlags(ESFIM_Game))
-		.SetWorldTimes(0, 0, 0)
+		.SetTime(FGameTime::CreateDilated(0, 0, 0, 0))
 		.SetGammaCorrection(RenderTargetResource->GetDisplayGamma()));
 
 	// Set the view family's render target/viewport.
@@ -308,7 +308,7 @@ void FImpactWaterGlobalShaderCommands::PropagateSplatToRenderTarget(FRHICommandL
 	GraphicsPSOInit.BoundShaderState.PixelShaderRHI = PixelShader.GetPixelShader();
 	GraphicsPSOInit.PrimitiveType = PT_TriangleList;
 
-	SetGraphicsPipelineState(RHICmdList, GraphicsPSOInit);
+	SetGraphicsPipelineState(RHICmdList, GraphicsPSOInit, 0);
 
 	FRHIPixelShader* ShaderRHI = PixelShader.GetPixelShader();
 
@@ -357,7 +357,7 @@ void FImpactWaterGlobalShaderCommands::ComputeNormalToRenderTarget(FRHICommandLi
 		RenderTargetResource,
 		NULL,
 		FEngineShowFlags(ESFIM_Game))
-		.SetWorldTimes(0, 0, 0)
+		.SetTime(FGameTime::CreateDilated(0, 0, 0, 0))
 		.SetGammaCorrection(RenderTargetResource->GetDisplayGamma()));
 
 	// Set the view family's render target/viewport.
@@ -405,7 +405,7 @@ void FImpactWaterGlobalShaderCommands::ComputeNormalToRenderTarget(FRHICommandLi
 	GraphicsPSOInit.BoundShaderState.PixelShaderRHI = PixelShader.GetPixelShader();
 	GraphicsPSOInit.PrimitiveType = PT_TriangleList;
 
-	SetGraphicsPipelineState(RHICmdList, GraphicsPSOInit);
+	SetGraphicsPipelineState(RHICmdList, GraphicsPSOInit, 0);
 
 	FRHIPixelShader* ShaderRHI = PixelShader.GetPixelShader();
 

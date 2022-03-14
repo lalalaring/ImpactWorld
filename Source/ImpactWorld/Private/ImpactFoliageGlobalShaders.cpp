@@ -208,7 +208,7 @@ void FImpactFoliageGlobalShaderCommands::GenerateSplatToRenderTarget(FRHICommand
 	GraphicsPSOInit.BoundShaderState.PixelShaderRHI = PixelShader.GetPixelShader();
 	GraphicsPSOInit.PrimitiveType = PT_TriangleList;
 
-	SetGraphicsPipelineState(RHICmdList, GraphicsPSOInit);
+	SetGraphicsPipelineState(RHICmdList, GraphicsPSOInit, 0);
 
 	PixelShader->SetUniformBuffer(RHICmdList, UniformBuffer);
 
@@ -258,7 +258,7 @@ void FImpactFoliageGlobalShaderCommands::PropagateSplatToRenderTarget(FRHIComman
 	GraphicsPSOInit.BoundShaderState.PixelShaderRHI = PixelShader.GetPixelShader();
 	GraphicsPSOInit.PrimitiveType = PT_TriangleList;
 
-	SetGraphicsPipelineState(RHICmdList, GraphicsPSOInit);
+	SetGraphicsPipelineState(RHICmdList, GraphicsPSOInit, 0);
 
 	FRHIPixelShader* ShaderRHI = PixelShader.GetPixelShader();
 
@@ -329,7 +329,7 @@ void FImpactFoliageGlobalShaderCommands::ComputeNormalToRenderTarget(FRHICommand
 	GraphicsPSOInit.BoundShaderState.PixelShaderRHI = PixelShader.GetPixelShader();
 	GraphicsPSOInit.PrimitiveType = PT_TriangleList;
 
-	SetGraphicsPipelineState(RHICmdList, GraphicsPSOInit);
+	SetGraphicsPipelineState(RHICmdList, GraphicsPSOInit, 0);
 
 	FRHIPixelShader* ShaderRHI = PixelShader.GetPixelShader();
 

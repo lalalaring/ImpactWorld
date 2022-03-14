@@ -15,9 +15,9 @@ BEGIN_GLOBAL_SHADER_PARAMETER_STRUCT(FGenerateWaterSplatUniformParameters, )
 	SHADER_PARAMETER_SAMPLER(SamplerState, CanvasTextureSampler)
 	SHADER_PARAMETER(float, TexelSizeScalar)
 	SHADER_PARAMETER(int, HitLocationNum)
-    SHADER_PARAMETER_ARRAY(FVector4, HitParam0Array, [MAX_HITLOCATION_SIZE])
-    SHADER_PARAMETER_ARRAY(FVector4, HitParam1Array, [MAX_HITLOCATION_SIZE])
-    SHADER_PARAMETER_ARRAY(FVector, HitLocationArray, [MAX_HITLOCATION_SIZE]) // This Buffer MUST list at last to adopt METAL API(bug?)
+    SHADER_PARAMETER_ARRAY(FVector4f, HitParam0Array, [MAX_HITLOCATION_SIZE])
+    SHADER_PARAMETER_ARRAY(FVector4f, HitParam1Array, [MAX_HITLOCATION_SIZE])
+    SHADER_PARAMETER_ARRAY(FVector4f, HitLocationArray, [MAX_HITLOCATION_SIZE]) // This Buffer MUST list at last to adopt METAL API(bug?)
 END_GLOBAL_SHADER_PARAMETER_STRUCT()
 
 typedef TUniformBufferRef<FGenerateWaterSplatUniformParameters> FGenerateWaterSplatUniformBufferRef;
